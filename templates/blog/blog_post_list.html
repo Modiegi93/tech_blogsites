@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<meta charset="utf8">
+	{% for blog_post in blog_posts %}
+	  <div class='blog-post'>
+	       <h2>{{ blog.post.title }}</h2>
+	       <p>{{ blog_post.content }}</p>
+
+
+	       {% if blog_post.tags.all %}
+	          <h3>Tags:</h3>
+		  <ul>
+		      {% for tag in blog_post.tags.all %}
+		          <li>{{ tag.name }}</li>
+		      {% endfor %}
+		  </ul>
+		{% endif %}
+
+		{% if blog_post.categories.all %}
+		   <h3>Categories:</h3>
+		   <ul>
+			{% for category in blog_post.categories.all %}
+			   <li>{{ category.name }}</li>
+			{% endfor %}
+	            </ul>
+		 {% endif %}
+
+		 {% if blog_post.featured_image %}
+		     <h3>Featured Image:</h3>
+		     <img src="{{ blog_post.featured_image.url }}" alt="Featured Image">
+		 {% endif %}
+	  </div>
+	{% empty %}
+	   <p>No blog posts found.</p>
+	{% endfor %}
+</html>

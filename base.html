@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Blog{% endblock %}</title>
+    <!-- Include your CSS and JavaScript files here -->
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <!-- Include your header content here -->
+        <h1>BlogSite</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'blog:list' %}">Home</a></li>
+                <li><a href="{% url 'themes:theme_list' %}">Themes</a></li>
+                <!-- Add more navigation links as needed -->
+            </ul>
+        </nav>
+        {% if user.is_authenticated %}
+        <div class="user-profile">
+            <p>Welcome, {{ user.username }}!</p>
+            <a href="{% url 'accounts:logout' %}">Logout</a>
+        </div>
+        {% else %}
+        <div class="user-authentication">
+            <a href="{% url 'accounts:login' %}">Login</a> /
+            <a href="{% url 'accounts:register' %}">Register</a>
+        </div>
+        {% endif %}
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Content specific to each page will go here -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <!-- Include your footer content here -->
+        <p>&copy; {% now 'Y' %} Blogsite. All rights reserved.</p>
+    </footer>
+
+    <!-- Include your JavaScript files here -->
+    {% block javascript %}
+    <script src="{% static 'js/main.js' %}"></script>
+    {% endblock %}
+</body>
+</html>

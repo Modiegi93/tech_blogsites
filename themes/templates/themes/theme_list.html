@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <h1>Theme List</h1>
+   <ul>
+	   {% for theme in themes %}
+	   	<li><a href="{% url 'themes:theme_detail theme.id %}">{{ theme.name }}</a></li>
+	   {% empty %}
+	   	<li>No themes available.</li>
+	   {% endfor %}
+    </ul>
+{% endblock %}
